@@ -44,13 +44,12 @@ class Visit_model extends CI_Model
     }
 
 
-    function triage_save($visit_id,$weight,$height,$blood_pressure,$temperature)
+    function pharmacy_save($visit_id,$total_amount)
     {
         $data = array(
-            'weight' => $weight,
-            'height' => $height,
-            'blood_pressure' => $blood_pressure,
-            'temperature' => $temperature
+            'total_amount_to_be_paid' => $total_amount,
+
+            'current_stage' => 5
         );
 
         $this->db->where('visit_id', $visit_id);
@@ -60,110 +59,70 @@ class Visit_model extends CI_Model
         }
     }
 
-    function get_patient($patient_id)
+    function consult_save($visit_id,$doctors_notes,$diagnosis,$prescription,$lab_test,$next_stage)
     {
-        $this->db->where('patient_id', $patient_id);
-        $query = $this->db->get('patients');
+        $data = array(
+            'doctors_notes' => $doctors_notes,
+            'doctor_diagnosis' => $diagnosis,
+            'doctor_prescription' => $prescription,
+            'lab_test_to_be_conducted' => $lab_test,
+            'current_stage' => $next_stage
+        );
 
-        if ($query->num_rows == 1) {
+        $this->db->where('visit_id', $visit_id);
+        if($this->db->update('visit', $data))
+        {
+            return TRUE;
+        }
+    }
+
+
+
+    function triage_save($visit_id,$weight,$height,$blood_pressure,$temperature)
+    {
+        $data = array(
+            'weight' => $weight,
+            'height' => $height,
+            'blood_pressure' => $blood_pressure,
+            'temperature' => $temperature,
+            'current_stage' => '2'
+        );
+
+        $this->db->where('visit_id', $visit_id);
+        if($this->db->update('visit', $data))
+        {
+            return TRUE;
+        }
+    }
+
+    function list_patients($current_stage)
+    {
+        $this->db->where('current_stage',$current_stage);
+        $this->db->where('visit_status',1);
+        $query=$this->db->get('visit');
+        if($query->num_rows>0)
+        {
             return $query->result_array();
         }
+
     }
 
-
-
-    /**
-     * Validate the login's data with the database
-     * @param string $user_name
-     * @param string $password
-     * @return void
-     */
-    function validate($user_name, $password)
+    function get_visit($visit_id)
     {
-        $this->db->where('user_name', $user_name);
-        $this->db->where('password', $password);
-        $query = $this->db->get('staff');
+        $this->db->where('visit_id', $visit_id);
+        $this->db->limit(1);
+        $query = $this->db->get('visit');
 
-        if ($query->num_rows == 1) {
-            return $query->result();
-        }
-    }
-
-    /**
-     * Serialize the session data stored in the database,
-     * store it in a new array and return it to the controller
-     * @return array
-     */
-    function get_db_session_data()
-    {
-        $query = $this->db->select('user_data')->get('ci_sessions');
-        $user = array(); /* array to store the user data we fetch */
-        foreach ($query->result() as $row) {
-            $udata = unserialize($row->user_data);
-            /* put data in array using username as key */
-            $user['user_name'] = $udata['user_name'];
-            $user['is_logged_in'] = $udata['is_logged_in'];
-        }
-        return $user;
-    }
-
-    /**
-     * Store the new user's data into the database
-     * @return boolean - check the insert
-     */
-    function create_member()
-    {
-
-        $this->db->where('user_name', $this->input->post('username'));
-        $query = $this->db->get('membership');
-
-        if ($query->num_rows > 0) {
-            echo '<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>';
-            echo "Username already taken";
-            echo '</strong></div>';
-        } else {
-
-            $new_member_insert_data = array(
-                'first_name' => $this->input->post('first_name'),
-                'last_name' => $this->input->post('last_name'),
-                'email_addres' => $this->input->post('email_address'),
-                'user_name' => $this->input->post('username'),
-                'pass_word' => md5($this->input->post('password'))
-            );
-            $insert = $this->db->insert('membership', $new_member_insert_data);
-            return $insert;
+        if ($query->num_rows ==1) {
+            return $query->result_array();
         }
 
     }
 
-    //create_member
 
-    function new_staff($name, $phone, $dob, $gender, $id_number, $role, $password, $email, $user_name)
-    {
-        $this->db->where('user_name', $user_name);
-        $query = $this->db->get('staff');
 
-        if ($query->num_rows > 0) {
-            echo '<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a><strong>';
-            echo "Username already taken";
-            echo '</strong></div>';
-        } else {
 
-            $new_staff_insert_data = array(
-                'name' => $name,
-                'phone' => $phone,
-                'dob' => $dob,
-                'gender' => $gender,
-                'id_number' => $id_number,
-                'role' => $role,
-                'password' => md5($password),
-                'email' => $email,
-                'user_name' => $user_name
-            );
-            $insert = $this->db->insert('staff', $new_staff_insert_data);
-            return $insert;
-        }
-    }
+
 
 
 }

@@ -1,25 +1,16 @@
 <div id="lab" class="modal fade hide" data-backdrop="true">
     <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal">&times;</button>
-        <h4> Lab test</h4>
+        <h4> Lab results</h4>
     </div>
     <div class="modal-body">
         <div class=" clearfix">
-            <form class="form-horizontal">
-                <div class="control-group ">
-                    <label for="lab_test">Lab test to be conducted</label>
 
-                    <div class="controls ">
-                        <textarea rows="8" id="lab_test" name="lab_test"></textarea>
-                    </div>
-                </div>
 
-                <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" value="Save">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-                </div>
-            </form>
-
+            <?php if(isset($visit[0]['lab_test_results']))
+            {
+                echo ($visit[0]['lab_test_results']);
+            } ?>
         </div>
 
 
@@ -28,96 +19,99 @@
 </div>
 
 
-<div id="prescription" class="modal fade hide" data-backdrop="true">
-    <div class="modal-header">
-        <button class="close" type="button" data-dismiss="modal">&times;</button>
-        <h4> Write prescription</h4>
-    </div>
-    <div class="modal-body">
-        <div class=" clearfix">
-            <form class="form-horizontal">
-                <div class="control-group ">
-                    <label for="prescription">Prescription</label>
-
-                    <div class="controls ">
-                        <textarea id="prescription" name="prescription"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" value="Save">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-                </div>
-            </form>
-        </div>
-
-
-    </div>
-
-</div>
-
-
-<div id="notes" class="modal fade hide" data-backdrop="true">
-    <div class="modal-header">
-        <button class="close" type="button" data-dismiss="modal">&times;</button>
-        <h4> Doctor`s notes</h4>
-    </div>
-    <div class="modal-body">
-        <div class=" clearfix">
-            <form class="form-horizontal">
-                <div class="control-group ">
-                    <label for="doctors_notes">Doctors notes</label>
-
-                    <div class="controls ">
-
-                        <textarea rows="8" id="doctors_notes" name="doctors_notes"></textarea>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label for="diagnosis">Diagnosis</label>
-
-                    <div class="controls">
-                        <textarea rows="8" id="diagnosis" name="diagnosis"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" value="Save">
-                    <a href="#" class="btn" data-dismiss="modal">Close</a>
-                </div>
-
-            </form>
-        </div>
-
-
-    </div>
-
-</div>
 
 <div class="container top">
 
 
-    <div class="page-header">
-        <h2>
-            Doctor consultation.
-        </h2>
-    </div>
+
+        <div class="page-header">
+            <h2>
+                Doctor consultation: Patient name:<?php echo($patient[0]['names']); ?> <br/>  Patient ID:<?php echo($visit[0]['patient_id']); ?><br/> Visit ID:<?php echo($visit[0]['visit_id']); ?>.
+            </h2>
+        </div>
+
+
+
+
+
+
+
     <div class="nav">
 
         <nav class="navbar">
             <ul>
-                <li>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#notes">Doctor`s notes</button>
-                </li>
-                <li>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#prescription">Write prescription
-                    </button>
-                </li>
-                <li>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#lab">Recommend lab test</button>
-                </li>
+                <?php if(isset($visit[0]['lab_test_results']))
+                { ?>
+                    <li>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#lab">view lab results</button>
+                    </li>
+               <?php } ?>
+
+
             </ul>
         </nav>
     </div>
+
+
+
+    <form class="form-horizontal" method="post" action="<?php echo(base_url()); ?>consultation/save/<?php echo($visit[0]['visit_id']); ?>">
+
+
+        <div class="control-group ">
+            <label for="doctors_notes">Doctors notes</label>
+
+            <div class="controls ">
+
+                <textarea cols="10" id="doctors_notes" name="doctors_notes"><?php if(isset($visit[0]['doctors_notes'])){ echo($visit[0]['doctors_notes']);} ?></textarea>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="diagnosis">Diagnosis</label>
+
+            <div class="controls">
+                <textarea cols="10" id="diagnosis" name="diagnosis"><?php if(isset($visit[0]['doctor_diagnosis'])){ echo($visit[0]['doctor_diagnosis']);} ?></textarea>
+            </div>
+        </div>
+
+        <div class="control-group ">
+            <label for="prescription">Prescription</label>
+
+            <div class="controls ">
+                <textarea cols="10" id="prescription" name="prescription"><?php if(isset($visit[0]['doctor_prescription'])){ echo($visit[0]['doctor_prescription']);} ?></textarea>
+            </div>
+        </div>
+
+        <div class="control-group ">
+            <label for="lab_test">Lab test to be conducted</label>
+
+            <div class="controls ">
+                <textarea cols="10" id="lab_test" name="lab_test"><?php if(isset($visit[0]['lab_test_to_be_conducted'])){ echo($visit[0]['lab_test_to_be_conducted']);} ?></textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" name="pharmacy" value="send to pharmacy">
+            <input class="btn btn-primary" type="submit" name="lab" value="send to laboratory">
+        </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </div>

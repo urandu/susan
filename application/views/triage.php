@@ -1,12 +1,24 @@
 <div class="container top">
 
 
+    <h4>Nurse menu</h4>
+    <div class="navbar ">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <ul class="nav">
+                    <li><a href="<? echo(base_url());?>triage">Triage</a></li>
+                    <li><a href="<? echo(base_url());?>register_patient">Register patient</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="page-header">
         <h2>
             Triage: Patient name:<?php echo($patient[0]['names']); ?> <br/>  Patient ID:<?php echo($visit[0]['patient_id']); ?><br/> Visit ID:<?php echo($visit[0]['visit_id']); ?>.
         </h2>
     </div>
-    <form class="form-horizontal" method="post" action="<?php echo(base_url()); ?>triage/save<?php echo($visit[0]['visit_id']); ?>">
+    <form class="form-horizontal" method="post" action="<?php echo(base_url()); ?>triage/save/<?php echo($visit[0]['visit_id']); ?>">
         <div class="control-group ">
             <label for="weight">Weight</label>
 

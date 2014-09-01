@@ -62,6 +62,10 @@ class Triage extends CI_Controller {
         if($this->visit_model->triage_save($visit_id,$weight,$height,$blood_pressure,$temperature))
         {
 
+            $data['flash_message'] = TRUE;
+            $data['main_content'] = 'triage1';
+            $this->load->view('includes/template', $data);
+
         }
 
 
