@@ -10,7 +10,32 @@ class User extends CI_Controller {
 	function index()
 	{
 		if($this->session->userdata('is_logged_in')){
-			redirect('admin/products');
+            $role=$this->session->userdata('role');
+            if($role==0)
+            {
+                redirect('consultation');
+            }
+            elseif($role==1)
+            {
+                redirect('nurse');
+            }
+            elseif($role==2)
+            {
+                redirect('lab');
+            }
+            elseif($role==3)
+            {
+                redirect('pharmacy');
+            }
+            elseif($role==4)
+            {
+                redirect('finance');
+            }
+            else
+            {
+                show_404();
+            }
+
         }else{
         	$this->load->view('admin/login');	
         }

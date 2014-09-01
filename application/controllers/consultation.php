@@ -12,7 +12,7 @@ class Consultation extends CI_Controller {
     public function index()
     {
 
-        if($this->session->userdata('role')!==0){
+        if($this->session->userdata('role')!=0){
             redirect('admin/login');
         }
 
@@ -36,7 +36,7 @@ class Consultation extends CI_Controller {
     }
     public function consult($visit_id)
     {
-        if($this->session->userdata('role')!==0){
+        if($this->session->userdata('role')!=0){
             redirect('admin/login');
         }
 
@@ -63,7 +63,7 @@ class Consultation extends CI_Controller {
 
     public function save($visit_id)
     {
-        if($this->session->userdata('role')!==0){
+        if($this->session->userdata('role')!=0){
             redirect('admin/login');
         }
         $doctors_notes=$this->input->post('doctors_notes');

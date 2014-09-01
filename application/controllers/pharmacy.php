@@ -4,7 +4,7 @@ class Pharmacy extends CI_Controller {
 
     public function index()
     {
-        if($this->session->userdata('role')!==3){
+        if($this->session->userdata('role')!=3){
             redirect('admin/login');
         }
         $this->load->model('visit_model');
@@ -28,7 +28,7 @@ class Pharmacy extends CI_Controller {
     public function consult($visit_id)
     {
 
-        if($this->session->userdata('role')!==3){
+        if($this->session->userdata('role')!=3){
             redirect('admin/login');
         }
         $this->load->model('visit_model');
@@ -56,7 +56,7 @@ class Pharmacy extends CI_Controller {
 
     public function save($visit_id)
     {
-        if($this->session->userdata('role')!==3){
+        if($this->session->userdata('role')!=3){
             redirect('admin/login');
         }
         $total_amount=$this->input->post('total_amount');

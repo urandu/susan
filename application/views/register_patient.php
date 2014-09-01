@@ -6,7 +6,7 @@
             New Patient
         </h2>
     </div>
-    <form class="form-horizontal" method="post" action="register_patient.php/new_patient">
+    <form class="form-horizontal" method="post" action="register_patient/new_patient">
         <div></div>
         <div class="control-group ">
             <label for="names">Names</label>
