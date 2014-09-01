@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: bildad
- * Date: 20/08/14
- * Time: 11:34
- */ ?>
-
-<?php
 class Consultation extends CI_Controller {
 
     public function index()
@@ -76,7 +68,7 @@ class Consultation extends CI_Controller {
         {
             $next_stage=3;
         }
-        elseif(isset($pharmacy))
+        if(isset($pharmacy))
         {
             $next_stage=4;
         }

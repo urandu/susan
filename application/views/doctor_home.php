@@ -51,6 +51,7 @@
                         echo '<td class="crud-actions">
                   <a href="' . base_url() . '/consultation/consult/' . $row['visit_id'] . '" class="btn btn-info">check in</a>';
 
+                        if(isset($row['lab_test_results'])){echo('from lab');}
                 echo '</td>';
                         echo '</tr>';
                     }

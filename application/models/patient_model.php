@@ -26,7 +26,7 @@ class Patient_model extends CI_Model
             'dob' => $dob,
             'gender' => $gender,
             'residence' => $place_of_residence,
-            'marital status' => $marital_status,
+            'marital_status' => $marital_status,
 
             'registered_by' => $staff
         );

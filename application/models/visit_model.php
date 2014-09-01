@@ -59,6 +59,22 @@ class Visit_model extends CI_Model
         }
     }
 
+    function lab_save($visit_id,$result)
+    {
+        $data = array(
+            'lab_test_results' => $result,
+
+            'current_stage' => 2
+        );
+
+        $this->db->where('visit_id', $visit_id);
+        if($this->db->update('visit', $data))
+        {
+            return TRUE;
+        }
+    }
+
+
     function consult_save($visit_id,$doctors_notes,$diagnosis,$prescription,$lab_test,$next_stage)
     {
         $data = array(

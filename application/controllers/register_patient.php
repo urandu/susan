@@ -25,6 +25,7 @@ class Register_patient extends CI_Controller {
         $this->load->model('patient_model');
         $staff= $this->session->userdata('staff_id');
         $this->patient_model->new_patient($names,$dob,$place_of_residence,$phone,$gender,$marital_status,$staff);
+        redirect('nurse');
     }
 }
 ?>
