@@ -11,6 +11,11 @@ class Consultation extends CI_Controller {
 
     public function index()
     {
+
+        if($this->session->userdata('role')!==0){
+            redirect('admin/login');
+        }
+
         $this->load->model('visit_model');
         $visit=$this->visit_model->list_patients(2);
 
@@ -31,6 +36,9 @@ class Consultation extends CI_Controller {
     }
     public function consult($visit_id)
     {
+        if($this->session->userdata('role')!==0){
+            redirect('admin/login');
+        }
 
         $this->load->model('visit_model');
 
@@ -55,6 +63,9 @@ class Consultation extends CI_Controller {
 
     public function save($visit_id)
     {
+        if($this->session->userdata('role')!==0){
+            redirect('admin/login');
+        }
         $doctors_notes=$this->input->post('doctors_notes');
         $diagnosis=$this->input->post('diagnosis');
         $prescription=$this->input->post('prescription');

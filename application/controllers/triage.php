@@ -5,6 +5,9 @@ class Triage extends CI_Controller {
 
     public function index()
     {
+        if($this->session->userdata('role')!==1){
+            redirect('admin/login');
+        }
 
         $data['main_content'] = 'triage';
         $this->load->view('includes/template', $data);
@@ -12,6 +15,9 @@ class Triage extends CI_Controller {
 
     public function get_patient()
     {
+        if($this->session->userdata('role')!==1){
+            redirect('admin/login');
+        }
         $patient_id=$this->input->post("patient_id");
         $this->load->model('patient_model');
         $patient=$this->patient_model->get_patient($patient_id);
@@ -30,6 +36,9 @@ class Triage extends CI_Controller {
     }
     public function start_visit($patient_id)
     {
+        if($this->session->userdata('role')!==1){
+            redirect('admin/login');
+        }
         $this->load->model('visit_model');
         $this->visit_model->start_visit($patient_id);
 
@@ -54,6 +63,9 @@ class Triage extends CI_Controller {
     }
     public function save($visit_id)
     {
+        if($this->session->userdata('role')!==1){
+            redirect('admin/login');
+        }
         $weight=$this->input->post('weight');
         $height=$this->input->post('height');
         $blood_pressure=$this->input->post('blood_pressure');
