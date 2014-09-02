@@ -6,6 +6,18 @@
             New staff
         </h2>
     </div>
+
+    <?php
+
+    if (isset($flash_message) && $flash_message) {
+        echo '<div class="alert alert-success">';
+        echo '<a class="close" data-dismiss="alert">×</a>';
+        echo '<strong>Successfully created.</strong> ';
+        echo '</div>';
+    }
+    ?>
+
+
     <form class="form-horizontal" method="post" action="<?php base_url() ?>new_staff/new_s">
         <div></div>
         <div class="control-group ">

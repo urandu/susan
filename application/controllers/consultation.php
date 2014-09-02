@@ -26,6 +26,27 @@ class Consultation extends CI_Controller {
         }
 
     }
+
+
+    public function list_patients_treated()
+    {
+        if($this->session->userdata('role')!=0){
+            redirect('admin/login');
+        }
+
+        $this->load->model('visit_model');
+        $visit=$this->visit_model->list_patients(2);
+
+        if($visit)
+        {
+            $data['visit']=$visit;
+            //load the view
+            $data['main_content'] = 'doctor_home';
+            $this->load->view('includes/template', $data);
+            // $this->load->view('consultation');
+        }
+    }
+
     public function consult($visit_id)
     {
         if($this->session->userdata('role')!=0){
@@ -62,13 +83,13 @@ class Consultation extends CI_Controller {
         $diagnosis=$this->input->post('diagnosis');
         $prescription=$this->input->post('prescription');
         $lab_test=$this->input->post('lab_test');
-        $lab=$this->input->post('lab');
-        $pharmacy=$this->input->post('pharmacy');
-        if(isset($lab))
+        $next=$this->input->post('next');
+        $next_visit=$this->input->post('next_visit');
+        if($next=="send to laboratory")
         {
             $next_stage=3;
         }
-        if(isset($pharmacy))
+        elseif($next=="send to pharmacy")
         {
             $next_stage=4;
         }
@@ -76,7 +97,7 @@ class Consultation extends CI_Controller {
 
         $this->load->model('visit_model');
 
-        if($this->visit_model->consult_save($visit_id,$doctors_notes,$diagnosis,$prescription,$lab_test,$next_stage))
+        if($this->visit_model->consult_save($visit_id,$doctors_notes,$diagnosis,$prescription,$lab_test,$next_stage,$next_visit))
         {
 
             $data['flash_message'] = TRUE;

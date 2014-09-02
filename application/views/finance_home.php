@@ -49,9 +49,8 @@
                             echo '<td>' . $row['patient_id'] . '</td>';
 
                             echo '<td class="crud-actions">
-                  <a href="' . base_url() . '/pharmacy/consult/' . $row['visit_id'] . '" class="btn btn-info">check in</a>';
+                  <a href="' . base_url() . '/finance/consult/' . $row['visit_id'] . '" class="btn btn-info">check in</a>';
 
-                            if(isset($row['total_amount_paid'])){ echo('from finance');}
                             echo '</td>';
                             echo '</tr>';
                         }
@@ -67,4 +66,4 @@
 
         </div>
         <?php }?>
-</div>
+    </div>

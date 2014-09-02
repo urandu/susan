@@ -76,6 +76,24 @@ class Pharmacy extends CI_Controller {
 
     }
 
+    public function end_visit($visit_id)
+    {
+        if($this->session->userdata('role')!=3){
+            redirect('admin/login');
+        }
+
+        $this->load->model('visit_model');
+
+        if($this->visit_model->end_visit($visit_id))
+        {
+
+            $data['flash_message'] = TRUE;
+            $data['main_content'] = 'pharmacy_home';
+            $this->load->view('includes/template', $data);
+
+        }
+    }
+
 
 }
 ?>

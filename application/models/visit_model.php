@@ -59,6 +59,21 @@ class Visit_model extends CI_Model
         }
     }
 
+
+    function end_visit($visit_id)
+    {
+        $data = array(
+            'visit_status' => 0,
+
+        );
+
+        $this->db->where('visit_id', $visit_id);
+        if($this->db->update('visit', $data))
+        {
+            return TRUE;
+        }
+    }
+
     function lab_save($visit_id,$result)
     {
         $data = array(
@@ -74,14 +89,29 @@ class Visit_model extends CI_Model
         }
     }
 
+    function finance_save($visit_id,$result)
+    {
+        $data = array(
+            'total_amount_paid' => $result,
 
-    function consult_save($visit_id,$doctors_notes,$diagnosis,$prescription,$lab_test,$next_stage)
+            'current_stage' => 4
+        );
+
+        $this->db->where('visit_id', $visit_id);
+        if($this->db->update('visit', $data))
+        {
+            return TRUE;
+        }
+    }
+
+    function consult_save($visit_id,$doctors_notes,$diagnosis,$prescription,$lab_test,$next_stage,$next_visit)
     {
         $data = array(
             'doctors_notes' => $doctors_notes,
             'doctor_diagnosis' => $diagnosis,
             'doctor_prescription' => $prescription,
             'lab_test_to_be_conducted' => $lab_test,
+            'next_visit' => $next_visit,
             'current_stage' => $next_stage
         );
 

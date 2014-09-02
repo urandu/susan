@@ -28,7 +28,8 @@ class New_staff extends CI_Controller {
 
         if($this->staff_model->new_staff($name,$phone,$dob,$gender,$id_number,$role,$password,$email,$user_name))
         {
-            $data['main_content'] = 'lab';
+            $data['flash_message']=TRUE;
+            $data['main_content'] = 'new_staff';
             $this->load->view('includes/template', $data);
         }
     }

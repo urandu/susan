@@ -20,6 +20,29 @@
 
 
 
+<div id="patient_info" class="modal fade hide" data-backdrop="true">
+    <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">&times;</button>
+        <h4> Patient information</h4>
+    </div>
+    <div class="modal-body">
+        <div class=" clearfix">
+
+
+           Name: <?php echo($patient[0]['names']); ?></br>
+           Date of birth:<?php echo($patient[0]['dob']); ?></br>
+           Weight: <?php echo($visit[0]['weight']); ?> kg</br>
+           Height: <?php echo($visit[0]['height']); ?> inches</br>
+           Residence: <?php echo($patient[0]['residence']); ?></br>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
 <div class="container top">
 
 
@@ -40,6 +63,9 @@
 
         <nav class="navbar">
             <ul>
+                <li>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#patient_info">Patient details</button>
+                </li>
                 <?php if(isset($visit[0]['lab_test_results']))
                 { ?>
                     <li>
@@ -90,9 +116,17 @@
             </div>
         </div>
 
+        <div class="control-group ">
+            <label for="next_visit">Next appointment</label>
+
+            <div class="controls ">
+                <input id="next_visit" type="date" name="next_visit" value="<?php if(isset($visit[0]['next_visit'])){ echo($visit[0]['next_visit']);} ?>">
+            </div>
+        </div>
+
         <div class="form-actions">
-            <input class="btn btn-primary" type="submit" name="pharmacy" value="send to pharmacy">
-            <input class="btn btn-primary" type="submit" name="lab" value="send to laboratory">
+            <input class="btn btn-primary" type="submit" name="next" value="send to pharmacy">
+            <input class="btn btn-primary" type="submit" name="next" value="send to laboratory">
         </div>
     </form>
 
