@@ -15,6 +15,16 @@ class Patient_model extends CI_Model
             return $query->result_array();
         }
     }
+    function get_latest_patient()
+    {
+        $this->db->limit(1);
+        $this->db->order_by('patient_id',"DESC");
+        $query = $this->db->get('patients');
+
+        if ($query->num_rows == 1) {
+            return $query->result_array();
+        }
+    }
 
 
 

@@ -25,7 +25,11 @@ class Register_patient extends CI_Controller {
         $this->load->model('patient_model');
         $staff= $this->session->userdata('staff_id');
         $this->patient_model->new_patient($names,$dob,$place_of_residence,$phone,$gender,$marital_status,$staff);
-        redirect('nurse');
+
+
+        $data['patient']=$this->patient_model->get_latest_patient();
+        $data['main_content'] = 'triage1';
+        $this->load->view('includes/template', $data);
     }
 }
 ?>

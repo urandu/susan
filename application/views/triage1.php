@@ -30,6 +30,16 @@
 
             <?php
 
+            if (isset($patient)) {
+                echo '<div class="alert alert-success">';
+                echo '<a class="close" data-dismiss="alert">×</a>';
+                echo '<strong>Patient name: </strong> '.$patient[0]['names'];
+                echo '</br><strong>Patient number: </strong> '.$patient[0]['patient_id'];
+                echo '</div>';
+            }
+            ?>
+            <?php
+
             if (isset($flash_message) && $flash_message) {
                 echo '<div class="alert alert-success">';
                 echo '<a class="close" data-dismiss="alert">×</a>';

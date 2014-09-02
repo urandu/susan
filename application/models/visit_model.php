@@ -49,6 +49,7 @@ class Visit_model extends CI_Model
         $data = array(
             'total_amount_to_be_paid' => $total_amount,
 
+            'pharmacy_staff' => $this->session->userdata('staff_id'),
             'current_stage' => 5
         );
 
@@ -58,6 +59,29 @@ class Visit_model extends CI_Model
             return TRUE;
         }
     }
+
+    function list_patients_treated($staff_id,$stage)
+    {
+        if($stage==1) {
+            $this->db->where('triage_staff', $staff_id);
+        }elseif($stage==2) {
+            $this->db->where('consultation_staff', $staff_id);
+        }elseif($stage==3) {
+            $this->db->where('lab_staff', $staff_id);
+        }elseif($stage==4) {
+            $this->db->where('pharmacy_staff', $staff_id);
+        }elseif($stage==5) {
+            $this->db->where('finance_staff', $staff_id);
+        }
+
+
+        $query = $this->db->get('visit');
+
+        if ($query->num_rows >0) {
+            return $query->result_array();
+        }
+    }
+
 
 
     function end_visit($visit_id)
@@ -79,6 +103,7 @@ class Visit_model extends CI_Model
         $data = array(
             'lab_test_results' => $result,
 
+            'lab_staff' => $this->session->userdata('staff_id'),
             'current_stage' => 2
         );
 
@@ -94,6 +119,7 @@ class Visit_model extends CI_Model
         $data = array(
             'total_amount_paid' => $result,
 
+            'finance_staff' => $this->session->userdata('staff_id'),
             'current_stage' => 4
         );
 
@@ -112,6 +138,7 @@ class Visit_model extends CI_Model
             'doctor_prescription' => $prescription,
             'lab_test_to_be_conducted' => $lab_test,
             'next_visit' => $next_visit,
+            'consultation_staff' => $this->session->userdata('staff_id'),
             'current_stage' => $next_stage
         );
 

@@ -82,6 +82,32 @@ class Triage extends CI_Controller {
 
 
     }
+    public function list_patients_treated()
+    {
+
+        if($this->session->userdata('role')!=1){
+            redirect('admin/login');
+        }
+
+        $this->load->model('visit_model');
+
+        $staff_id=$this->session->userdata('staff_id');
+        $visit=$this->visit_model->list_patients_treated($staff_id,1);
+        if($visit)
+        {
+
+            $data['visit']=$visit;
+
+            $data['main_content'] = 'patients_triage';
+            $this->load->view('includes/template', $data);
+
+        }
+        else
+        {
+            $data['main_content'] = 'patients_triage';
+            $this->load->view('includes/template', $data);
+        }
+    }
 
 
 

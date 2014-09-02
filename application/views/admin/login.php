@@ -6,7 +6,17 @@
     <link href="<?php echo base_url(); ?>assets/css/admin/global.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="navbar ">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand">Maya health</a>
+
+        </div>
+    </div>
+</div>
+
 <div class="container login">
+    please login to continue
     <?php
     $attributes = array('class' => 'form-signin');
     echo form_open('admin/login/validate_credentials', $attributes);
@@ -20,7 +30,7 @@
         echo '</div>';
     }
     echo "<br />";
-    echo anchor('admin/signup', 'Signup!');
+
     echo "<br />";
     echo "<br />";
     echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');

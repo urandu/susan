@@ -30,20 +30,28 @@ class Consultation extends CI_Controller {
 
     public function list_patients_treated()
     {
+
         if($this->session->userdata('role')!=0){
             redirect('admin/login');
         }
 
         $this->load->model('visit_model');
-        $visit=$this->visit_model->list_patients(2);
 
+        $staff_id=$this->session->userdata('staff_id');
+        $visit=$this->visit_model->list_patients_treated($staff_id,2);
         if($visit)
         {
-            $data['visit']=$visit;
-            //load the view
-            $data['main_content'] = 'doctor_home';
+
+                $data['visit']=$visit;
+
+                $data['main_content'] = 'patients_treated';
+                $this->load->view('includes/template', $data);
+
+        }
+        else
+        {
+            $data['main_content'] = 'patients_treated';
             $this->load->view('includes/template', $data);
-            // $this->load->view('consultation');
         }
     }
 
