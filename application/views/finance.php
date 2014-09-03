@@ -13,7 +13,7 @@
             <label for="total_amount_paid">total amount</label>
 
             <div class="controls">
-                <textarea id="total_amount_paid" name="total_amount_paid"></textarea>
+                <input type="text" id="total_amount_paid" name="total_amount_paid" value="<?php if(isset($visit[0]['total_amount_paid'])){ echo($visit[0]['total_amount_paid']); } ?>">
             </div>
         </div>
 

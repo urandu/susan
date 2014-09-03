@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 02, 2014 at 04:10 PM
+-- Generation Time: Sep 03, 2014 at 07:22 AM
 -- Server version: 5.5.35
 -- PHP Version: 5.4.6-1ubuntu1.5
 
@@ -70,8 +70,10 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `residence` varchar(60) NOT NULL,
   `marital_status` varchar(10) NOT NULL,
   `registered_by` int(20) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `user_name` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`patient_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `visit` (
   `blood_pressure` int(3) DEFAULT NULL,
   `temperature` int(3) DEFAULT NULL,
   PRIMARY KEY (`visit_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

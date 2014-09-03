@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <title>Login|Staff</title>
+    <title>Login|Patient</title>
     <meta charset="utf-8">
     <link href="<?php echo base_url(); ?>assets/css/admin/global.css" rel="stylesheet" type="text/css">
 </head>
@@ -11,7 +11,7 @@
         <div class="container">
             <a class="brand">Maya health</a>
             <ul class="nav">
-                <li><a href="<?php echo(base_url()); ?>patient">Patient login</a></li>
+                <li><a href="<?php echo(base_url()); ?>admin/login">Staff login</a></li>
             </ul>
 
         </div>
@@ -19,11 +19,11 @@
 </div>
 
 <div class="container login">
-    <h4>staff login</h4>
+    <h4>patient login</h4>
     please login to continue
     <?php
     $attributes = array('class' => 'form-signin');
-    echo form_open('admin/login/validate_credentials', $attributes);
+    echo form_open('patient/patient_validate_credentials', $attributes);
     echo '<h2 class="form-signin-heading">Login</h2>';
     echo form_input('user_name', '', 'placeholder="Username"');
     echo form_password('password', '', 'placeholder="Password"');

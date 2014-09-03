@@ -23,10 +23,7 @@
                     <a href="<?php echo(base_url()) ?>consultation/list_patients_treated">patients served</a>
                 </li>
                 <?php } if($this->session->userdata('role')==1) { ?>
-                <li>
-                    <a href="<?php echo(base_url()) ?>register_patient">Home</a>
 
-                </li>
                 <li>
                     <a href="<?php echo(base_url()) ?>triage">Home</a>
                 </li>
@@ -55,6 +52,24 @@
                 <li>
                     <a href="<?php echo(base_url()) ?>pharmacy/list_patients_treated">patients served</a>
                 </li>
+                <?php }?>
+                <?php if($this->session->userdata('staff_id')==1) {  ?>
+                <li>
+                    <a href="<?php echo(base_url()) ?>admin/all_staff">List-staff</a>
+
+                </li>
+                    <li>
+                        <a href="<?php echo(base_url()) ?>admin/all_patients">List-patients</a>
+
+                    </li>
+                    <li>
+                        <a href="<?php echo(base_url()) ?>admin/all_visits">List-visits</a>
+
+                    </li>
+                    <li>
+                        <a href="<?php echo(base_url()) ?>new_staff">Register staff</a>
+
+                    </li>
                 <?php }?>
                 <li>
                     <a href="<?php echo base_url(); ?>admin/logout">Logout</a>

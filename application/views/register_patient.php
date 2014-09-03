@@ -12,28 +12,28 @@
             <label for="names">Names</label>
 
             <div class="controls">
-                <input type="text" id="names" name="names">
+                <input required type="text" id="names" name="names">
             </div>
         </div>
         <div class="control-group ">
             <label for="dob">Date of Birth</label>
 
             <div class="controls">
-                <input type="date" id="dob" name="dob">
+                <input required type="date" id="dob" name="dob">
             </div>
         </div>
         <div class="control-group ">
             <label for="place_of_residence">Place of residence</label>
 
             <div class="controls">
-                <input type="text" id="place_of_residence" name="place_of_residence">
+                <input required type="text" id="place_of_residence" name="place_of_residence">
             </div>
         </div>
         <div class="control-group ">
             <label for="phone">Phone</label>
 
             <div class="controls">
-                <input type="text" id="phone" name="phone">
+                <input required type="text" id="phone" name="phone">
             </div>
         </div>
         <div class="control-group ">
@@ -57,6 +57,22 @@
                 </select>
             </div>
         </div>
+
+        <div class="control-group ">
+            <label  for="password">Password</label>
+
+            <div class="controls">
+                <input required type="password" id="password" name="password">
+            </div>
+        </div>
+        <div class="control-group ">
+            <label for="user_name">Username</label>
+
+            <div class="controls">
+                <input required type="text" id="user_name" name="user_name">
+            </div>
+        </div>
+
         <div class="form-actions">
             <input type="submit" value="Submit">
         </div>

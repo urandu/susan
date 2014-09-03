@@ -110,7 +110,49 @@ class User extends CI_Controller {
 			$data['message_error'] = TRUE;
 			$this->load->view('admin/login', $data);	
 		}
-	}	
+	}
+
+
+
+
+
+
+    function patient_validate_credentials()
+    {
+
+        $this->load->model('patient_model');
+
+        $user_name = $this->input->post('user_name');
+        $password = $this->__encrip_password($this->input->post('password'));
+
+        $is_valid = $this->patient_model->validate($user_name, $password);
+
+        if($is_valid)
+        {
+
+
+            $patient_id=$is_valid[0]['patient_id'];
+            //print_r($is_valid);
+            $data = array(
+                'user_name' => $user_name,
+                'patient_id' => $patient_id,
+                'is_logged_in' => true
+
+            );
+
+            $this->session->set_userdata($data);
+
+            redirect('patient');
+
+
+            //redirect('admin/products');
+        }
+        else // incorrect username or password
+        {
+            $data['message_error'] = TRUE;
+            $this->load->view('admin/patient_login', $data);
+        }
+    }
 
     /**
     * The method just loads the signup view

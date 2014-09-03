@@ -60,7 +60,7 @@ class Finance extends CI_Controller {
         if($this->session->userdata('role')!=4){
             redirect('admin/login');
         }
-        $results=$this->input->post('total_amount');
+        $results=$this->input->post('total_amount_paid');
 
 
         $this->load->model('visit_model');

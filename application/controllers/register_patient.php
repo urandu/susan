@@ -24,7 +24,11 @@ class Register_patient extends CI_Controller {
         $marital_status=$this->input->post('marital_status');
         $this->load->model('patient_model');
         $staff= $this->session->userdata('staff_id');
-        $this->patient_model->new_patient($names,$dob,$place_of_residence,$phone,$gender,$marital_status,$staff);
+        $password=$this->input->post('password');
+
+        $user_name=$this->input->post('user_name');
+
+        $this->patient_model->new_patient($names,$dob,$place_of_residence,$phone,$gender,$marital_status,$staff,$password,$user_name);
 
 
         $data['patient']=$this->patient_model->get_latest_patient();

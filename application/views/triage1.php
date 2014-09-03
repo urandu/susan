@@ -52,7 +52,7 @@
                     <label for="patient_id">Enter Patient number</label>
                     <div class="controls">
                         <input id="patient_id" name="patient_id">
-                        <input type="submit" value="Next" class="btn btn-primary">
+                        <input required pattern="[0-9]" type="submit" value="Next" class="btn btn-primary">
 
                     </div>
                 </div>

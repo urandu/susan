@@ -83,6 +83,14 @@ class Visit_model extends CI_Model
     }
 
 
+    function all_visits()
+    {
+        $query = $this->db->get('visit');
+
+        if ($query->num_rows > 0) {
+            return $query->result_array();
+        }
+    }
 
     function end_visit($visit_id)
     {

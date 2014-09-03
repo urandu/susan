@@ -20,6 +20,15 @@ class Staff_model extends CI_Model
         }
     }
 
+    function all_staff()
+    {
+        $query = $this->db->get('staff');
+
+        if ($query->num_rows > 0) {
+            return $query->result_array();
+        }
+    }
+
     /**
      * Serialize the session data stored in the database,
      * store it in a new array and return it to the controller
